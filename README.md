@@ -1,1 +1,2 @@
 # IPA
+The charts in this repo identify counties where the risk of defaults on GSE-backed mortgages may be more likely to increase as natural disasters resulting from climate change increase. The charts accompanied a needs assessment that I and five other graduate students at UC Berkeley completed for the Government Accountability Organization in Spring 2022. The assessment highlighted future lines of inquiry for the GAO regarding how climate change's impacts on the housing market may impact the federal government.
