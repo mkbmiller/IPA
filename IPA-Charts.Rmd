@@ -1,10 +1,10 @@
----
-title: 'Risks to Federal Government from Climate Impacts '
-Authors: Ananya Vajpeyi, Molly Miller 
+
+title: 'Risks to the Federal Government from Climate Impacts '
+Authors: Ananya Vajpeyi & Molly Miller 
 output:
   html_document: default
   pdf_document: default
----
+
 
 ```{r setup, include=FALSE}
 
@@ -32,50 +32,19 @@ is.factor(fema$STATE)
 
 ```
 
-#```{r}
-FNMA_tract <- FNMA_data %>% 
-rename(US_Postal_State_Code = "US.Postal.State.Code") %>% 
-group_by(US_Postal_State_Code, County, Census_Tract,) %>% 
-summarise(n=n(),
-            note_amount = sum(X.Note.amount),
-            UPB_amount = sum(Acquisition.unpaid.principal.balance),
-            High_DTI_note_amount = sum(X.Note.amount[Debt.to.income..DTI..ratio > 45]),
-            High_DTI_UPB = sum(Acquisition.unpaid.principal.balance[Debt.to.income..DTI..ratio > 45]),
-            LTV60orlower = sum(Loat.to.value.ration.at.origination.or.combined.LTV.where.available <= 60),
-            LTV61_70 = sum(Loat.to.value.ration.at.origination.or.combined.LTV.where.available > 60 & Loat.to.value.ration.at.origination.or.combined.LTV.where.available <= 70),
-            LTV71_80 = sum(Loat.to.value.ration.at.origination.or.combined.LTV.where.available > 70 & Loat.to.value.ration.at.origination.or.combined.LTV.where.available <= 80),
-            LTV81_90 = sum(Loat.to.value.ration.at.origination.or.combined.LTV.where.available > 80 & Loat.to.value.ration.at.origination.or.combined.LTV.where.available <= 90),
-            LTV91_100 = sum(Loat.to.value.ration.at.origination.or.combined.LTV.where.available > 90 & Loat.to.value.ration.at.origination.or.combined.LTV.where.available <= 100),
-            LTVover100 = sum(Loat.to.value.ration.at.origination.or.combined.LTV.where.available > 100),
-            DTI45orlower = sum(Debt.to.income..DTI..ratio <= 45),
-            DTIover45 = sum(Debt.to.income..DTI..ratio > 45),
-            DTStract = sum(X.Rural.Census.Tract == 1 | Lower.Mississippi.Delta.County == 1 | Middle.Appalachia.County == 1 | Persistent.Poverty.County == 1 | Area.of.concentrated.poverty == 1 | High.opportunity.area == 1 | Qualified.opportunity.zone.QOZ..Census.tract == 1))
+```{r}
+#FNMA_tract <- FNMA_data %>% rename(US_Postal_State_Code = "US.Postal.State.Code") %>% group_by(US_Postal_State_Code, County, Census_Tract,) %>% summarise(n=n(), note_amount = sum(X.Note.amount), UPB_amount = sum(Acquisition.unpaid.principal.balance), High_DTI_note_amount = sum(X.Note.amount[Debt.to.income..DTI..ratio > 45]), High_DTI_UPB = sum(Acquisition.unpaid.principal.balance[Debt.to.income..DTI..ratio > 45]), LTV60orlower = sum(Loat.to.value.ration.at.origination.or.combined.LTV.where.available <= 60), LTV61_70 = sum(Loat.to.value.ration.at.origination.or.combined.LTV.where.available > 60 & Loat.to.value.ration.at.origination.or.combined.LTV.where.available <= 70), LTV71_80 = sum(Loat.to.value.ration.at.origination.or.combined.LTV.where.available > 70 & Loat.to.value.ration.at.origination.or.combined.LTV.where.available <= 80), LTV81_90 = sum(Loat.to.value.ration.at.origination.or.combined.LTV.where.available > 80 & Loat.to.value.ration.at.origination.or.combined.LTV.where.available <= 90), LTV91_100 = sum(Loat.to.value.ration.at.origination.or.combined.LTV.where.available > 90 & Loat.to.value.ration.at.origination.or.combined.LTV.where.available <= 100), LTVover100 = sum(Loat.to.value.ration.at.origination.or.combined.LTV.where.available > 100), DTI45orlower = sum(Debt.to.income..DTI..ratio <= 45), DTIover45 = sum(Debt.to.income..DTI..ratio > 45), DTStract = sum(X.Rural.Census.Tract == 1 | Lower.Mississippi.Delta.County == 1 | Middle.Appalachia.County == 1 | Persistent.Poverty.County == 1 | Area.of.concentrated.poverty == 1 | High.opportunity.area == 1 | Qualified.opportunity.zone.QOZ..Census.tract == 1))
 
-
-view(FNMA_tract)
-write.csv(FNMA_tract,"FNMA_by_censustract.csv")
+#view(FNMA_tract)
+#write.csv(FNMA_tract,"FNMA_by_censustract.csv")
 ```
-#```{r}
-FHLMC_tract <- FHLMC_data %>% 
-  rename(US_Postal_State_Code = "US.Postal.State.Code") %>% 
-  group_by(US_Postal_State_Code, County, Census.Tract) %>%
-  summarise(n=n(),
-            note_amount = sum(X.Note.amount),
-            UPB_amount = sum(Acquisition.unpaid.principal.balance),
-            High_DTI_note_amount = sum(X.Note.amount[Debt.to.income..DTI..ratio > 45]),
-            High_DTI_UPB = sum(Acquisition.unpaid.principal.balance[Debt.to.income..DTI..ratio > 45]),
-            LTV60orlower = sum(Loat.to.value.ration.at.origination.or.combined.LTV.where.available <= 60),
-            LTV61_70 = sum(Loat.to.value.ration.at.origination.or.combined.LTV.where.available > 60 & Loat.to.value.ration.at.origination.or.combined.LTV.where.available <= 70),
-            LTV71_80 = sum(Loat.to.value.ration.at.origination.or.combined.LTV.where.available > 70 & Loat.to.value.ration.at.origination.or.combined.LTV.where.available <= 80),
-            LTV81_90 = sum(Loat.to.value.ration.at.origination.or.combined.LTV.where.available > 80 & Loat.to.value.ration.at.origination.or.combined.LTV.where.available <= 90),
-            LTV91_100 = sum(Loat.to.value.ration.at.origination.or.combined.LTV.where.available > 90 & Loat.to.value.ration.at.origination.or.combined.LTV.where.available <= 100),
-            LTVover100 = sum(Loat.to.value.ration.at.origination.or.combined.LTV.where.available > 100),
-            DTI45orlower = sum(Debt.to.income..DTI..ratio <= 45),
-            DTIover45 = sum(Debt.to.income..DTI..ratio > 45),
-            DTStract = sum(X.Rural.Census.Tract == 1 | Lower.Mississippi.Delta.County == 1 | Middle.Appalachia.County == 1 | Persistent.Poverty.County == 1 | Area.of.concentrated.poverty == 1 | High.opportunity.area == 1 | Qualified.opportunity.zone.QOZ..Census.tract == 1))
-  
-view(FHLMC_tract)
-write.csv(FHLMC_tract,"FHLMC_by_tract.csv")
+
+
+```{r}
+#FHLMC_tract <- FHLMC_data %>% rename(US_Postal_State_Code = "US.Postal.State.Code") %>% group_by(US_Postal_State_Code, County, Census.Tract) %>% summarise(n=n(), note_amount = sum(X.Note.amount), UPB_amount = sum(Acquisition.unpaid.principal.balance), High_DTI_note_amount = sum(X.Note.amount[Debt.to.income..DTI..ratio > 45]), High_DTI_UPB = sum(Acquisition.unpaid.principal.balance[Debt.to.income..DTI..ratio > 45]), LTV60orlower = sum(Loat.to.value.ration.at.origination.or.combined.LTV.where.available <= 60), LTV61_70 = sum(Loat.to.value.ration.at.origination.or.combined.LTV.where.available > 60 & Loat.to.value.ration.at.origination.or.combined.LTV.where.available <= 70), LTV71_80 = sum(Loat.to.value.ration.at.origination.or.combined.LTV.where.available > 70 & Loat.to.value.ration.at.origination.or.combined.LTV.where.available <= 80), LTV81_90 = sum(Loat.to.value.ration.at.origination.or.combined.LTV.where.available > 80 & Loat.to.value.ration.at.origination.or.combined.LTV.where.available <= 90), LTV91_100 = sum(Loat.to.value.ration.at.origination.or.combined.LTV.where.available > 90 & Loat.to.value.ration.at.origination.or.combined.LTV.where.available <= 100), LTVover100 = sum(Loat.to.value.ration.at.origination.or.combined.LTV.where.available > 100), DTI45orlower = sum(Debt.to.income..DTI..ratio <= 45), DTIover45 = sum(Debt.to.income..DTI..ratio > 45), DTStract = sum(X.Rural.Census.Tract == 1 | Lower.Mississippi.Delta.County == 1 | Middle.Appalachia.County == 1 | Persistent.Poverty.County == 1 | Area.of.concentrated.poverty == 1 | High.opportunity.area == 1 | Qualified.opportunity.zone.QOZ..Census.tract == 1))
+
+#view(FHLMC_tract)
+#write.csv(FHLMC_tract,"FHLMC_by_tract.csv")
 ```
 
 ```{r}
